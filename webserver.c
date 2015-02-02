@@ -22,7 +22,7 @@ void usage(void)
 	printf("\t-p port (Default: 8888)\n");
 	printf("\t-t number of worker threads (Default: 1, Range: 1-1000\n");
 	printf("\t-f path to static files (Default: .)\n");
-	printf("\t-h some help message\n");
+	printf("\t-h show help message\n");
 	exit (8);
 }
 
@@ -53,8 +53,6 @@ int main(int argc, char* argv[])
 
     memset(&cliAddress, 0, sizeof(cliAddress)); /* zero-fill cli_addr structure*/
 
-
-
     while ((opt = getopt(argc, argv, "p:t:f:h")) != -1)
     {
         switch(opt)
@@ -77,6 +75,7 @@ int main(int argc, char* argv[])
 				break;
 			case '?':
 				printf("\nMissing argument(s)");
+				usage();
 				break;
 		 }
      }

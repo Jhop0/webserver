@@ -44,6 +44,7 @@ void *handleCliReq(void *arg)
 		sprintf(tmpFilePath,"%s", filePath);
 		//memcpy(tmpFilePath, filePath, sizeof(filePath));
 
+
 		pthread_mutex_lock (&mtex);
 		while (emptyQ() == 1)
 		{  /* block if buffer empty */
@@ -155,7 +156,7 @@ int sendFile(int sock, char *fName)
 	else /* Open file successful */
 	{
 		if(fstat(fp,&fStat) < 0) return 0;
-		sprintf(sendBuffer,"%s%d%d",GETFILE_STATUS_OK, fStat.st_size, 0);
+		sprintf(sendBuffer,"%s%d",GETFILE_STATUS_OK, fStat.st_size);
 		printf("INFO:[%010u] Send response:[%s]\n", pthread_self(), sendBuffer);
 		send(sock, sendBuffer, SEND_BUFFER_SIZE,0);
 		/* Read file and stream to client */
